@@ -21,7 +21,7 @@ for claim in claims:
             fabric[left, top] += 1
             top +=1
         left +=1
-        
+
 results = fabric.values()
 counter = 0
 for res in results:
@@ -67,4 +67,3 @@ for claim in claims:
             noOver = True
     if noOver == True:
         print "Part 2: " + str(test)
-    

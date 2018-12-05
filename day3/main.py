@@ -27,7 +27,7 @@ counter = 0
 for res in results:
     if res > 1:
         counter += 1
-print "Part 1: Overlapping claims: " + str(counter)
+print ("Part 1: Overlapping claims: " + str(counter))
 
 
 #Second part
@@ -57,7 +57,7 @@ data = fabric.values()
 for claim in claims:
     noOver = False
     test = claim
-    print test
+    print (test)
     for sublist in data:
         res = test in sublist
         if res == True:
@@ -66,4 +66,4 @@ for claim in claims:
         else:
             noOver = True
     if noOver == True:
-        print "Part 2: " + str(test)
+        print ("Part 2: " + str(test))

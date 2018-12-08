@@ -45,11 +45,27 @@ while i < max_0:
         j += 1
     i += 1
 
-res = np.transpose(res)
+#res = np.transpose(res)
 print(res)
 
 # find finite areas
-row = list()
-col = list()
-ref = list()
-finite = set(row).symmetric_difference(set(ref))
+
+finite = list()
+for n in np.arange(0, size[0], 1):
+    finite.append(n)
+
+i = 0
+while i < max_0:
+    j = 0
+    while j < max_1:
+        if i == 0 or j == 0 or i == max_0-1 or j ==max_1-1:
+            if finite.count(res[i,j]) > 0:
+                finite.remove(res[i,j])
+        j += 1
+    i += 1
+
+unique, counts = np.unique(res, return_counts=True)
+fin = dict(zip(unique, counts))
+print(fin)
+
+print(fin[finite[1]])

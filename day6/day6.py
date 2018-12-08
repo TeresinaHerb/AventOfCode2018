@@ -3,7 +3,7 @@ from scipy.spatial.distance import cdist
 
 
 
-area = np.loadtxt('test.txt', dtype = 'int', delimiter = ',')
+area = np.loadtxt('input.txt', dtype = 'int', delimiter = ',')
 size = area.shape
 
 # construct second array
@@ -28,13 +28,18 @@ while i < max_0+1:
 
 out = cdist(area, comp, metric = 'cityblock')
 
-res = np.zeros(shape = (max_0, max_1))
+
+i_end = max_0-min_0+1
+j_end = max_1-min_1+1
+res = np.zeros(shape = (i_end, j_end))
 
 i = 0
+i_end = max_0-min_0+1
+j_end = max_1-min_1+1
 k = 0
-while i < max_0:
+while i < i_end:
     j = 0
-    while j < max_1:
+    while j < j_end:
         temp = np.argsort(out[:, k])
         ind = np.argmin(out[:, k])
         if out[temp[0], k] != out[temp[1], k]:
@@ -45,27 +50,34 @@ while i < max_0:
         j += 1
     i += 1
 
-#res = np.transpose(res)
-print(res)
+#print(res)
 
 # find finite areas
 
 finite = list()
-for n in np.arange(0, size[0], 1):
+for n in np.arange(0, size[0]-1, 1):
     finite.append(n)
 
 i = 0
-while i < max_0:
+while i < i_end:
     j = 0
-    while j < max_1:
-        if i == 0 or j == 0 or i == max_0-1 or j ==max_1-1:
+    while j < j_end:
+        if i == 0 or j == 0 or i == i_end-1 or j ==j_end-1:
             if finite.count(res[i,j]) > 0:
                 finite.remove(res[i,j])
         j += 1
     i += 1
 
 unique, counts = np.unique(res, return_counts=True)
-fin = dict(zip(unique, counts))
-print(fin)
+count = dict(zip(unique, counts))
 
-print(fin[finite[1]])
+print(count)
+print(finite)
+
+res2 = dict()
+for fin in finite:
+    res2[fin] = count[fin]
+
+max_area = max(res2.values())
+
+print (max_area)

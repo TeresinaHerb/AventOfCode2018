@@ -28,14 +28,13 @@ while i < max_0+1:
 
 out = cdist(area, comp, metric = 'cityblock')
 
+#print(out)
 
 i_end = max_0-min_0+1
 j_end = max_1-min_1+1
 res = np.zeros(shape = (i_end, j_end))
 
 i = 0
-i_end = max_0-min_0+1
-j_end = max_1-min_1+1
 k = 0
 while i < i_end:
     j = 0
@@ -71,13 +70,35 @@ while i < i_end:
 unique, counts = np.unique(res, return_counts=True)
 count = dict(zip(unique, counts))
 
-print(count)
-print(finite)
-
 res2 = dict()
 for fin in finite:
     res2[fin] = count[fin]
 
 max_area = max(res2.values())
 
-print (max_area)
+print(max_area)
+
+#Part 2
+
+res3 = np.zeros(shape = (i_end, j_end))
+i = 0
+k = 0
+while i < i_end:
+    j = 0
+    while j < j_end:
+        #print(out[:, k])
+        temp = np.sum(out[:, k])
+        if temp < 10000:
+            res3[i, j] = 1
+        else:
+            res3[i, j] = 99
+        k += 1
+        j += 1
+    i += 1
+
+#print (res3)
+
+unique, counts = np.unique(res3, return_counts=True)
+count = dict(zip(unique, counts))
+
+print(count)

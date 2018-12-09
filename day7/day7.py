@@ -1,6 +1,6 @@
-from anytree import Node, RenderTree, find_by_attr, AsciiStyle, PreOrderIter,PostOrderIter
+from anytree import Node, RenderTree, find_by_attr, AsciiStyle, PreOrderIter, PostOrderIter, LevelOrderGroupIter
 
-instructions = [instruction.rstrip('\n') for instruction in open('test.txt')]
+instructions = [instruction.rstrip('\n') for instruction in open('input.txt')]
 
 i = 0
 for instruction in instructions:
@@ -16,12 +16,21 @@ for instruction in instructions:
 for pre, _, node in RenderTree(root):
     print("%s%s" % (pre, node.name))
 
-# start with root
-# get children, sort alphabetical
-res = list()
-res.append(root)
+temp = root.children
 
-tempC = root.children
-#print(tempC)
-#print(sorted(tempC))
-print([node.name for node in PreOrderIter(root)])
+
+k = [[node.name for node in children] for children in LevelOrderGroupIter(root)]
+print(k)
+fin = list()
+temp = list()
+fin.append(k[0][0])
+
+i = 1
+while i < len(k):
+    for e in k[i]:
+        temp.append(e)
+    temp.sort()
+    fin.append(temp[0])
+    temp.remove(temp[0])
+    #print(temp)
+    i += 1

@@ -1,7 +1,8 @@
 import numpy as np
 import re
+from PIL import Image
 
-with open('input.txt') as f:
+with open('test.txt') as f:
     temp = f.readlines()
 
 rows = len(temp)
@@ -24,7 +25,7 @@ dim_x = int(max_x-min_x+1)
 dim_y = int(max_y-min_y+1)
 
 n = 0
-while n < 10000:
+while n < 4:
     base_temp = np.zeros(shape=(rows,2))
     k = 0
     while k < rows:
@@ -50,5 +51,7 @@ while n < 10000:
     pic = pic.transpose()
     #fileN = 'test' + str(n) + '.txt'
     #np.savetxt(fileN, pic, fmt='%d')
-    print(str(dim_xt) + " " + str(dim_yt))
+    img = Image.new('1', (dim_yt, dim_xt))
+    img.putdata(pic)
+    img.save('my.png')
     n += 1

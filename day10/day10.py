@@ -49,9 +49,12 @@ while n < 4:
         m += 1
 
     pic = pic.transpose()
-    #fileN = 'test' + str(n) + '.txt'
-    #np.savetxt(fileN, pic, fmt='%d')
+    import random
+    data = [random.randint(0,1) for i in range(64*64)]
+    data = pic.tolist()
+    print(data)
     img = Image.new('1', (dim_yt, dim_xt))
     img.putdata(pic)
     img.save('my.png')
+    #print(pic)
     n += 1
